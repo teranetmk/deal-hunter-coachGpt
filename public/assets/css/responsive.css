@@ -1,0 +1,77 @@
+@media only screen and (max-width: 768px){
+    .page-wrapper{
+        height: auto;
+    }
+    .header{
+        height: auto;
+    }
+    .header .header-content{
+        flex-direction: column;
+    }
+    .header .header-content .logo{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .header .header-content .header-info{
+        padding-bottom: 10px;
+    }
+    .page-content{
+        height: auto;
+        padding-top: 15px;
+    }
+    .footer{
+        height: auto;
+    }
+    .heading-h1{
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .heading-h2{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .mobile-center{
+        text-align: center;
+    }
+    .step1-img{
+        height: auto;
+    }
+    .step2-img{
+        height: auto;
+    }
+    .mobile-flex-column{
+        flex-direction: column;
+    }
+    .footer-copyright-content p{
+        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+    }
+    .mb-col-0{
+        margin-bottom: 0 !important;
+    }
+    .offer-content p{
+        font-size: 8px;
+    }
+    .offer-main-box{
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 1rem !important;
+    }
+    .offer-main-box .offer-content p{
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .offer-main-actions{
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+    .theme-card-popup{
+        margin-bottom: 20px;
+    }
+    .theme-card-popup .description{
+        width: 100%;
+    }
+    .theme-card-popup{
+        padding: 20px;
+    }
+}

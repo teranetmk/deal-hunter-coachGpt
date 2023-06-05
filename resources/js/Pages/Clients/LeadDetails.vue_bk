@@ -1,0 +1,119 @@
+<script >
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Head} from '@inertiajs/inertia-vue3';
+import Slider from 'primevue/slider';
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
+import {DomHandler} from 'primevue/utils';
+import InputError from '@/Components/InputError.vue';
+import {Link, useForm, usePage} from '@inertiajs/inertia-vue3';
+import EditLead from './EditLead.vue';
+import { ref } from 'vue'
+const childComponentRef = ref();
+
+
+export default {
+    name : 'Lead',
+    props: [ "propertyData", "list", "geo"],
+
+    data() {
+        return {
+            property: this.propertyData,
+            list: this.list,
+            geo: this.geo,
+            disbaled: true,
+            fas: null,
+        }
+    },
+    async mounted() {
+        // console.log(childComponentRef)
+
+        // childComponentRef.value.doSomething();
+
+
+        var lat = this.geo.lat;
+            var lng = this.geo.lng;
+            // The location of Uluru
+            const uluru =  {lat: lat, lng: lng};
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            });
+
+        window.initMap = initMap;
+
+    },
+    methods: {
+        async submitItem() {
+            $("#updateCust").submit();
+        }
+
+    },
+    components: { AuthenticatedLayout, Head, Slider, Link, VueSlider, EditLead }
+}
+</script>
+<style>
+    #map {
+        height: 236px;
+        border-radius: 15px;
+    }
+</style>
+<template>
+    <Head title="Lead"/>
+    <AuthenticatedLayout >
+        <template #pageHeading>
+            <div class="d-flex w-100">
+                <Link :href="route('properties-data.list', list.id)"
+                    :class="[ 'p-ripple']"
+                    method="get"
+                    exact
+                    class="hover-links my-auto round-border p-2 mr-2 d-flex"
+                    role="menuitem" v-ripple
+                    >
+                    <!-- <i class="pi pi-sign-out text-xl"></i> -->
+                    <i class="pi pi-arrow-left text-2xl  font-bold my-auto"/>
+                </Link>
+                <span class="text-2xl mr-3 my-auto"><strong>{{property.PropertyAddress}} </strong></span>
+
+                <span class="tag-t my-auto d-flex p-2 round-border">
+                    <img class="tag-i my-auto mr-2" src="/BullsEyeIcon.svg"/>
+                    <strong class="my-auto">{{ list.tags.length ?? 0 }}</strong>
+                </span>
+
+                <div class="ms-auto" v-if="disbaled">
+                    <Button class="p-button p-button-outlined p-button-danger "
+                                style="border-radius: 0.5rem !important; display: inline-block !important"
+                                icon="pi pi-pencil"
+                                @click="disbaled = flase;"
+
+                                label="Edit Info"/>
+                </div>
+
+                <div class="ms-auto" v-if="!disbaled">
+                    <Button class="p-button p-button-outlined p-button-danger "
+                                style="border-radius: 0.5rem !important; display: inline-block !important"
+                                icon="pi pi-save"
+                                @click="submitItem()"
+                                label="Save Info"/>
+                </div>
+            </div>
+
+        </template>
+
+        <div>
+            <EditLead  :property="property" :list="list" :geo="geo" :disbaled="disbaled" :fas="fas" ref="childComponentRef" />
+        </div>
+    </AuthenticatedLayout>
+</template>
+
+
+
+
+
+
